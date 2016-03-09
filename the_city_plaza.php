@@ -267,19 +267,26 @@ class The_City_Plaza_Widget extends WP_Widget {
     $cache_duration = empty($instance['cache_duration']) ? ' ' : $instance['cache_duration'];
 
     echo $before_widget;
+    echo "<div class='container'>";
     if (!empty( $title )) {
       $display_title = $title;
       if(!empty($title_link)) {
         $display_title = '<a href="http://'.$subdomain_key.'.onthecity.org/plaza" target="_blank">'.$title.'</a>';
       }
-      echo $before_title . $display_title . $after_title;
+      $html = "<div class='row'>
+		 <div class='col-md-2 col-md-offset-5'>
+		   <h1 style='text-align: center;'>$title</h1>
+                   <hr>
+                 </div>
+               </div>";
+      echo $html;
     };
 
     include dirname(__FILE__).'/widget_info.php';
-
+    echo "</div>";
     echo $after_widget;
   }
-  
+
 }
 
 add_action('widgets_init', create_function('', 'return register_widget("The_City_Plaza_Widget");'));

@@ -1,4 +1,4 @@
-<ul class="tc_wp_content">
+  <div class="row">
   <?php 
     $show_dates = $show_dates == 'on' ? $show_dates : 0;
     $show_type = $show_type == 'on' ? $show_type : 0;
@@ -22,4 +22,5 @@
       echo 'Cannot pull data from plaza.  Either enable allow_url_fopen in the php.ini file, or install curl for php.';
     }
   ?>
-</ul>
+  </div>
+

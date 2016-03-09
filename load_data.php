@@ -59,6 +59,7 @@
     if( empty($plaza_titles) ) {
       $html[] = "No $plaza_choice found";      
     } else {
+      $item_count = 0;
       foreach($plaza_titles as $indx => $title) {  
         $item = $plaza_display->select($indx);  
 
@@ -78,9 +79,14 @@
           $item_created_at = get_class($item) == 'Event' ? $item->starting_at() : $item->created_at();
           if( !empty($item_created_at) ) {
             $item_created_at = date_parse($item_created_at);
-            $item_date = implode( array($item_created_at['month'], $item_created_at['day'], $item_created_at['year']), '-');
+            $item_date = implode( array($item_created_at['year'], $item_created_at['month'], $item_created_at['day']), '-');
           }
         }       
+
+        // Format the date with the full month name, the date, and the date suffix,
+        // e.g. "March 7th".
+        $date = date_create($item_date);
+        $item_date = date_format($date, 'F jS');
 
         if(!empty($show_type)) {
           $item_type = get_class($item);
@@ -91,8 +97,26 @@
           }
         }  
 
+        // Strip unprintable characters from the content and display the first sentence of the content.
+        $item_content = $item->content();
+        $item_content = preg_replace('/[[:^print:]]/', ' ', $item_content);
+        $item_content = strtok($item_content, '.!?');
+
         $item_display_date = empty($item_date) ? '' : '<div class="tc_wp_date">' . $item_date . '</div>';
-        $html[] = "<li class='tc_wp_item'>$item_display_date<a class='tc_wp_link' href='$plaza_link' target='_blank'>$title</a></li>";
+
+        // Wrap every three entries in a new row.
+        if ($item_count % 3 == 0)
+          $html[] = "<div class='row'>";
+
+        $html[] = "<div class='col-md-4'>
+            <span class='eighteen'>$item_date - $title</span>
+            <p>$item_content... <a href='$plaza_link'>Read More</a></p>
+        </div>";
+
+        $item_count++;
+
+        if ($item_count % 3 == 0)
+          $html[] = "</div>";
       }
     }
 
