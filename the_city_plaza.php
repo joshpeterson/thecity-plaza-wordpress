@@ -4,8 +4,8 @@ Plugin Name: The City Plaza Widget
 Plugin URI: https://github.com/joshpeterson/thecity-plaza-wordpress/tree/sbapeters
 Description: This widget allows you to pull your OnTheCity.org plaza information into your WordPress website (modified for the sbapeters.org site).
 Author: Wes Hays (Modified by Josh Peterson)
-Version: 0.8.6 (modified)
-Author URI: http://www.OnTheCity.org
+Version: 0.8.6.1
+Author URI: https://github.com/joshpeterson/thecity-plaza-wordpress/tree/sbapeters
 */
 
 include_once 'plaza_scripts.php';
