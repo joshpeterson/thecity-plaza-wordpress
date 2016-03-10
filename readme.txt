@@ -72,6 +72,9 @@ None yet...
 
 == Changelog ==
 
+= 0.8.6.1 =
+* Modify the layout to fit the sbapeters.org site design.
+
 = 0.8.6 =
 * Ensure SSL on connection to The City.
 
